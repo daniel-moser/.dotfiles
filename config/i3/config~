@@ -1,0 +1,248 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+
+# -----
+# Autostart
+# -----
+# DPI hack
+exec_always xrandr --dpi 169
+
+# -----
+# Font
+# -----
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+ font pango:Terminus 14
+#font pango:Noto Sans 19
+
+
+# ----
+# Keybinding Variables
+# ----
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up k
+set $down l
+Set $left j
+set $right semicolon
+set $mod Mod4
+
+# Note I Use En Spaces (u0x2002) so the bar thinks they are just one word
+set $ws1 /mail
+set $ws2 /net
+set $ws3 /editor
+set $ws4 /conf
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 /music
+set $ws10 /wicd
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# ----
+# Colors and Look (from https://github.com/electro7/dotfiles/blob/master/.i3/config)
+# ----
+gaps inner 10
+gaps outer 5
+
+Smart_borders on
+
+new_window pixel 3
+new_float pixel 3
+
+# Xresource-based. Do not edit manually, will be overwritten by script
+# --- APPLY XRES BEGIN
+set $c_background #282828
+set $c_red_d #cc241d
+set $c_white_d #dbae93
+set $c_black_l #665c54
+set $c_yellow_d #d79921
+set $c_blue_d #458588
+set $c_yellow_l #fabd2f
+set $c_cursor #fff000
+set $c_white_l #fbf1c7
+set $c_magenta_l #d3869b
+set $c_green_d #98971a
+set $c_magenta_d #b16286
+set $c_black_d #1d2021
+set $c_blue_l #83a598
+set $c_green_l #b8bb26
+set $c_foreground #ebdbb2
+set $c_cyan_l #8ec07c
+set $c_cyan_d #689d6a
+set $c_red_l #fb4934
+# --- APPLY XRES END
+
+#class                  background?   border        text          split
+client.focused          $c_white_d    $c_white_d    $c_black_l    $c_white_d
+client.focused_inactive $c_black_d    $c_background    $c_black_l    $c_black_d
+client.unfocused        $c_black_d    $c_background    $c_black_l    $c_black_d
+client.urgent           $c_magenta_l  $c_magenta_l  $c_black_l    $c_magenta_l
+client.background       $c_background
+
+
+# ----
+# Keybindings
+# ----
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi
+bindsym $mod+d Exec rofi -show run -opacity "85" -bg "#dddddd" -fg "#222222"  -bw 0 -padding 50 -font "Noto Sans 24"
+
+# start pavuctrl
+bindsym $mod+p Exec pavucontrol
+# prevent screenblanking
+bindsym $mod+b Exec blanking-off
+# start emacs in new shell
+#bindsym $mod+m Exec urxvt -e emacs
+
+# focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move workspace to other screen
+bindsym $mod+m move workspace to output left
+
+# alternatively, you can use the cursor keys:
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+u split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# move the currently focused window to the scratchpad
+# bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+# bindsym $mod+minus scratchpad show
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file (disabling this because electro7's bar makes my CPU cry on restart)
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3-msg exit
+
+# ----
+# Media Keybindings
+# ----
+#bindsym XF86AudioRaiseVolume exec lemonvol +
+#bindsym XF86AudioLowerVolume exec lemonvol -
+#bindsym XF86AudioMute exec lemonvol M
+#bindsym XF86AudioPause exec lempc pause
+#bindsym XF86AudioPlay exec lempc pause
+#bindsym XF86AudioNext exec lempc next
+#bindsym XF86AudioPrev exec lempc prev
+
+# ----
+# Resize Mode Options
+# ----
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym $left       resize shrink width 5 px or 1 ppt
+	bindsym $down       resize grow height 5 px or 1 ppt
+        bindsym $up         resize shrink height 5 px or 1 ppt
+        bindsym $right      resize grow width 5 px or 1 ppt
+
+# back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Window assignments
+assign [class="chromium"] $ws2
+#assign [class="Firefox"] $ws1
+assign [class="Wicd"] $ws10
+#assign [class="Telegram"] $ws4
+assign [class="Thunderbird"] $ws1
+
+
+bar {
+    i3bar_command ~/.config/i3/lemonbar_epikur/lemonbar.sh
+    position top
+}
