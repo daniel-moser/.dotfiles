@@ -5,39 +5,43 @@
 
 - link:
     ~/.gitconfig:
-        path: gitconfig
+        path: config/gitconfig
         create: false
         relink: false
         force: false
     ~/.tmux.conf:
-        path: tmux.conf
+        path: config/tmux.conf
         create: false
         relink: false
         force: false
     ~/.zshrc:
-        path: zshrc
+        path: config/zshrc
         create: false
         relink: false
         force: false
     ~/.Xresources:
-        path: Xresources
+        path: config/Xresources
         create: false
         relink: false
         force: false
     ~/.Xdefaults:
-        path: Xdefaults
+        path: config/Xdefaults
         create: false
         relink: false
         force: false
     ~/.xinitrc:
-        path: xinitrc
+        path: config/xinitrc
         create: false
         relink: false
         force: false
     ~/.config/i3:
-        path: config/i3/
+        path: config/config/i3/
         create: true
         relink: false
         force: false
-
-
+    ~/.config/sublime-text-3/:
+	path: config/config/sublime-text-3/
+	create: true
+	relink: false
+	force: false
+	
