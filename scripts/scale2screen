@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# home 1920x1200 right
+command_0='xrandr --output eDP1 --auto --output DP1 --auto --panning 3840x2400+3200+0 --scale 2x2 --right-of eDP1'
+
+# home 1920x1200 left
+command_1='xrandr --output eDP1 --auto --panning 3200x1800+3840+0 --output DP1 --auto  --panning 3840x2400+0+0 --scale 2x2 --left-of eDP1'
+
+# 3d lab 1680x1050 left
+command_2='xrandr --output eDP1 --auto --output DP1 --auto --panning 3360x2100+3200+0 --scale 2x2 --left-of eDP1'
+
+# hkc dinger 1920x1080 right
+command_3='xrandr --output eDP1 --auto --output DP1 --auto --panning 3840x2160+3200+0 --scale 2x2 --rightc-of eDP1'
+
+if [ $# -gt 0 ]		
+then
+    case $1 in
+	1)
+	    echo "home 1920x1200 left"
+	    command=$command_1
+	    ;;
+	2)
+	    echo "3d lab 1680x1050 left"
+	    command=$command_2
+	    ;;
+	3)
+	    echo "hkc lab 1680x1080 right"	    
+	    command=$command_3
+	    ;;
+	*)
+	    echo "home 1920x1200 right"
+	    command=$command_0
+	    ;;
+    esac
+fi
+
+if [ $# -eq 0 ]
+then
+    command=$command_0
+fi
+
+echo "executing: '$command'"
+eval ${command}
